@@ -17,15 +17,5 @@ namespace DIENTU.Models
         {
             get { return (int)(ssoLuong * sdonGia); }
         }
-        public Giohang(int sanphamID)
-        {
-            IsanphamID = sanphamID;
-            SanPham sp = db.SanPhams.Single(n => n.sanPhamID == IsanphamID);
-            stenSanPham = sp.tenSanPham;
-            sdonGia = Double.Parse(sp.donGia.ToString());
-            ssoLuong = 1;
-            shinhAnh = sp.hinhAnh;
-        }
-
     }
 }

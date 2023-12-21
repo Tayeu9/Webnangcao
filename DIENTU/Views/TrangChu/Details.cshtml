@@ -159,7 +159,8 @@
                             <p style="color: #000;">600 kg available</p>
                         </div>
                     </div>
-                    @using (Html.BeginForm("ThemGioHang", "Cart", new { iMasp = Model.sanPhamID, strURL = Request.Url.ToString() }))
+                    <!-- <p><a href="/them-gio-hang?productId=@Model.sanPhamID&quantity=1" class="btn btn-black py-3 px-5">Add to Cart</a></p> -->
+                    @using (Html.BeginForm("AddItem", "Cart", new { @productId = Model.sanPhamID, @quantity = 1 }))
                     {
                 <input type="submit" value="Mua hàng" id="bgnGioHang" />}
                 </div>

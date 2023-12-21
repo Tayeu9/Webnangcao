@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4144f19fee5246e880b0e4c47aca274c" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_HVTShopModel.ChiTietHoaDon" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_HVTShopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_HVTShopModel.GioHang" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_HVTShopModel.HoaDon" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_HVTShopModel.KhachHang" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_HVTShopModel.QuanTriVien" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_HVTShopModel.SanPham" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+      <Diagram DiagramId="2ebeec7407144cd189c1ec7ff2e9e731" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_HVTShopModel.ChiTietHoaDon" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.GioHang" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.HoaDon" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.KhachHang" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.QuanTriVien" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.SanPham" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HVTShopModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="DB_HVTShopModel.FK__ChiTietHo__donGi__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_HVTShopModel.FK__ChiTietHo__sanph__35BCFE0A" ManuallyRouted="false" />
         <AssociationConnector Association="DB_HVTShopModel.FK__SanPham__danhMuc__2A4B4B5E" ManuallyRouted="false" />

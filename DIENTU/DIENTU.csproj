@@ -47,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -133,6 +133,7 @@
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\GioHangsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="DanhMuc.cs">
@@ -165,7 +166,9 @@
     <Compile Include="KhachHang.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Giohang.cs" />
+    <Compile Include="Models\ProductDao.cs" />
     <Compile Include="ProcDeleteSanPham_Result.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
@@ -186,6 +189,15 @@
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SanPham.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -213,8 +225,8 @@
     <Content Include="Content\style.css" />
     <Content Include="DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataBaseModel.Context.cs</LastGenOutput>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>DataBaseModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DataBaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -440,7 +452,12 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\TrangChu\Details.cshtml" />
-    <Content Include="Views\TrangChu\Cart.cshtml" />
+    <Content Include="Views\Cart\Paycheck.cshtml" />
+    <Content Include="Views\GioHangs\Create.cshtml" />
+    <Content Include="Views\GioHangs\Delete.cshtml" />
+    <Content Include="Views\GioHangs\Details.cshtml" />
+    <Content Include="Views\GioHangs\Edit.cshtml" />
+    <Content Include="Views\GioHangs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

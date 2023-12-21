@@ -1,10 +1,13 @@
-﻿
-@using DIENTU.Models
-@model List<Giohang>
+﻿@model List<DIENTU.Models.CartItem>
 @{
     ViewBag.Title = "Cart";
 }
-
+@if (Model == null || Model.Count == 0)
+{
+    <p class="text-info text-center">
+        Giỏ hàng của bạn rỗng!
+    </p>
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +91,7 @@
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap hero-bread" style="background-image: url('~/images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
@@ -107,45 +110,46 @@
                         <table class="table">
                             <thead class="thead-primary">
                                 <tr class="text-center">
-                                    <th>&nbsp;</th>
+
                                     <th>&nbsp;</th>
                                     <th>Product name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model != null)
-                                {
-                                    foreach (var item in Model)
+                                
+                                    @foreach (var item in Model)
                                     {
-                                        <tr class="text-center">
-                                            <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                <tr class="text-center">
+                                    <td class="image-prod"><div class="img" style="background-image:url(/images/@item.sanpham.hinhAnh);"></div></td>
 
-                                            <td class="image-prod"><div class="img" style="background-image:url(~/images/@item.shinhAnh));"></div></td>
+                                    <td class="product-name">
+                                        <a>@item.sanpham.tenSanPham)</a>
 
-                                            <td class="product-name">
-                                                <a>@item.stenSanPham)</a>
+                                    </td>
 
-                                            </td>
+                                    <td class="price"><a></a> @item.sanpham.donGia.ToString("#,##0").Replace(',', '.') VND</td>
+                                    @*Chỉnh sửa giỏ hàng gọi về action CapNhatGioHang*@
+                                    @using (Html.BeginForm("CapnhapGiohang", "Cart", new { @productId = item.sanpham.sanPhamID }))
+                                    {
+                                        <td class="quantity">
+                                            <div class="input-group mb-3">
+                                                <a name="quantity" class="quantity form-control input-number"><input type="text" name="txtSoluong" value="@item.Quantity"/></a>
+                                            </div>
+                                        </td>
 
-                                            <td class="price"><a></a> @String.Format("{0:0,0}", item.sdonGia) VND</td>
-
-                                            <td class="quantity">
-                                                <div class="input-group mb-3">
-                                                    <a name="quantity" class="quantity form-control input-number">@item.ssoLuong</a>
-                                                </div>
-                                            </td>
-
-                                            <td class="total"><a></a>@String.Format("{0:0,0}", item.ThanHTien) VNĐ</td>
-                                        </tr><!-- END TR-->
+                                        <td class="total">@(item.sanpham.donGia * item.Quantity)VNĐ</td>
+                                        @*Xóa giỏ hàng gọi về Action XoaGioHang*@
+                                        <td class="product-remove">@Html.ActionLink("Xóa", "Xoagiohang", new { @productId = item.sanpham.sanPhamID })</td>
+                                        <td class="product-remove"><input type="submit" value="Cập nhật" class="btn-secondary" /></td>
                                     }
-                                }
-                                else
-                                {
-                                    <h3>Model is null.</h3>
-                                }
+                                </tr><!-- END TR-->
+                                    }
+                              
                             </tbody>
                         </table>
                     </div>
@@ -191,23 +195,23 @@
                         <h3>Cart Totals</h3>
                         <p class="d-flex">
                             <span>Subtotal</span>
-                            <span><a>@ViewBag.Tongtien</a></span>
+                            <span><a></a></span>
                         </p>
                         <p class="d-flex">
                             <span>Delivery</span>
-                            <span>$0.00</span>
+                            <span>@ViewBag.Tongtien VND</span>
                         </p>
                         <p class="d-flex">
                             <span>Discount</span>
-                            <span>$3.00</span>
+                            <span>$0.00</span>
                         </p>
                         <hr>
                         <p class="d-flex total-price">
                             <span>Total</span>
-                            <span>$17.60</span>
+                            <span>@ViewBag.Tongtien VND</span>
                         </p>
                     </div>
-                    <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                    <p><a href="" class="btn btn-primary py-3 px-4"></a>@Html.ActionLink("Proceed to checkout", "Paycheck")</p>
                 </div>
             </div>
         </div>

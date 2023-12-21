@@ -17,5 +17,6 @@ namespace DIENTU
         public int khachHangID { get; set; }
         public int sanphamID { get; set; }
         public Nullable<int> soLuong { get; set; }
+        public Nullable<decimal> donGia { get; set; }
     }
 }

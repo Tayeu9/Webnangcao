@@ -12,131 +12,117 @@ namespace DIENTU.Controllers
     {
         // GET: Cart
         DB_HVTShopEntities db = new DB_HVTShopEntities();
-        public List<Giohang> Laygiohang()
+        private string CartSession = "CartSession";
+        public ActionResult AddItem(int productId, int quantity)
         {
-            List<Giohang> lstGioHang = Session["Giohang"] as List<Giohang>;
-            if (lstGioHang == null)
+            var Sanpham = new ProductDao().ViewDetail(productId);
+            var cart = Session[CartSession];
+            if (cart != null)
             {
-                //Nếu giỏ hàng chưa tồn tại thì mình tiến hành khởi tao list giỏ hàng (sessionGioHang)
-                lstGioHang = new List<Giohang>();
-                Session["Giohang"] = lstGioHang;
-            }
-            return lstGioHang;
-        }
-        public ActionResult ThemGiohang(int isanphamID, string strURL)
-        {
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.sanPhamID == isanphamID);
-            if (sp == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            //Lấy ra session giỏ hàng
-            List<Giohang> lstGioHang = Laygiohang();
-            //Kiểm tra sp này đã tồn tại trong session[giohang] chưa
-            Giohang sanpham = lstGioHang.Find(n => n.IsanphamID == isanphamID);
-            if(sanpham == null)
-            {
-                sanpham = new Giohang(isanphamID);
-                //Add sản phẩm mới thêm vào list
-                lstGioHang.Add(sanpham);
-                return Redirect(strURL);
+                var list = (List<CartItem>)cart;
+                if (list.Exists(x => x.sanpham.sanPhamID == productId)) 
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.sanpham.sanPhamID == productId)
+                        {
+                            item.Quantity += quantity;
+                        }
+                    }
+
+                }
+                else
+                {
+                    //tạo mới đối tượng CartItem
+                    var item = new CartItem();
+                    item.sanpham = Sanpham;
+                    item.Quantity = quantity;
+                    list.Add(item);
+                }
+                //Gán vào session
+                Session[CartSession] = list;
             }
             else
             {
-                sanpham.ssoLuong++;
-                return Redirect(strURL);
-            }
-        }
-        public ActionResult CapNhatGioHang(int iMaSP, FormCollection f)
-        {
-            //Kiểm tra masp
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.sanPhamID == iMaSP);
-            //Nếu get sai masp thì sẽ trả về trang lỗi 404
-            if (sp == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            //Lấy giỏ hàng ra từ session
-            List<Giohang> lstGioHang = Laygiohang();
-            //Kiểm tra sp có tồn tại trong session["GioHang"]
-            Giohang sanpham = lstGioHang.SingleOrDefault(n => n.IsanphamID == iMaSP);
-            //Nếu mà tồn tại thì chúng ta cho sửa số lượng
-            if (sanpham != null)
-            {
-                sanpham.ssoLuong = int.Parse(f["txtSoLuong"].ToString());
-
-            }
-            return RedirectToAction("Index");
-        }
-        public int Tongsoluong()
-        {
-            int iTongsoluong = 0;
-            List<Giohang> lstGiohang = Session["Index"] as List<Giohang>;
-            if(lstGiohang != null)
-            {
-                iTongsoluong = lstGiohang.Sum(n => n.ssoLuong);
-            }
-            return iTongsoluong;
-        }
-        private int Tongtien()
-        {
-            int iTongtien = 0;
-            List<Giohang> lstGiohang = Session["Index"] as List<Giohang>;
-            if (lstGiohang != null)
-            {
-                iTongtien = lstGiohang.Sum(n => n.ThanHTien);
-            }
-            return iTongtien;
-        }
-        public ActionResult XoaGioHang(int iMaSP)
-        {
-            //Kiểm tra masp
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.sanPhamID == iMaSP);
-            //Nếu get sai masp thì sẽ trả về trang lỗi 404
-            if (sp == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            //Lấy giỏ hàng ra từ session
-            List<Giohang> lstGioHang = Laygiohang();
-            Giohang sanpham = lstGioHang.SingleOrDefault(n => n.IsanphamID == iMaSP);
-            //Nếu mà tồn tại thì chúng ta cho sửa số lượng
-            if (sanpham != null)
-            {
-                lstGioHang.RemoveAll(n => n.IsanphamID == iMaSP);
-
-            }
-            if (lstGioHang.Count == 0)
-            {
-                return RedirectToAction("Index", "TrangChu");
+                //tạo mới đối tượng CartItem
+                var item = new CartItem();
+                item.sanpham = Sanpham;
+                item.Quantity = quantity;
+                var list = new List<CartItem>();
+                list.Add(item);
+                //Gán vào session
+                Session[CartSession] = list;
             }
             return RedirectToAction("Index");
         }
         public ActionResult Index()
         {
-            List<Giohang> lstGiohang = Laygiohang();
-            if (lstGiohang != null)
+            var cart = Session[CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
             {
-                foreach (var item in lstGiohang)
-                {
-                    Debug.WriteLine("SanPhamID: " + item.IsanphamID); // In ra SanPhamID để kiểm tra
-                }
+                list = (List<CartItem>)cart;
             }
-            else
+            ViewBag.Tongtien = Tongtien(); 
+            return View(list) ;
+        }
+        public ActionResult Xoagiohang(int productId)
+        {
+            var Sanpham = new ProductDao().ViewDetail(productId);
+            var cart = Session[CartSession];
+            List<CartItem> list = cart as List<CartItem>;
+            if (list == null)
             {
-                Debug.WriteLine("lstGiohang is null."); // Nếu lstGiohang trả về null, in ra thông báo
+                list = new List<CartItem>();
+                cart = list;
             }
+            CartItem sanpham = list.SingleOrDefault(n => n.sanpham.sanPhamID == productId);
+            if (sanpham != null)
+            {
+                list.RemoveAll(n => n.sanpham.sanPhamID == productId);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
 
-            //if (lstGiohang.Count == 0)
-            //{
-            //    return RedirectToAction("Index", "Trangchu");
-            //}
-            ViewBag.Tongsoluong = Tongsoluong();
+        }
+        public ActionResult CapnhapGiohang(int productId, FormCollection f)
+        {
+            var cart = Session[CartSession];
+            List<CartItem> list = cart as List<CartItem>;
+            if (list == null)
+            {
+                list = new List<CartItem>();
+                cart = list;
+            }
+            CartItem sanpham = list.SingleOrDefault(n => n.sanpham.sanPhamID == productId);
+            if (sanpham != null)
+            {
+                sanpham.Quantity = int.Parse(f["txtSoluong"].ToString());
+            }
+            return RedirectToAction("Index");
+        }
+        public double Tongtien()
+        {
+            double itongtien = 0;
+            var cart = Session[CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+                itongtien = (double)list.Sum(n => n.Quantity * n.sanpham.donGia);
+            }
+            return itongtien;
+        }
+        public ActionResult Paycheck()
+        {
+            var cart = Session[CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
             ViewBag.Tongtien = Tongtien();
-            return View(lstGiohang);
+            return View(list);
         }
     }
 }
