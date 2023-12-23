@@ -1,0 +1,79 @@
+﻿@model IEnumerable<SHOPHVT.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="center texta" style="margin-bottom:20px">
+    <h2>Quản lý sản phẩm</h2>
+</div>
+
+<div class="center texta btb">
+    @Html.ActionLink("Thêm mới sản phẩm", "Create", new { @class = "btn btn-primary col-md-offset-2 col-md-10 btb center" })
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Tên danh mục
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.donGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.soLuong)
+            </td>
+            <td>
+                <img class="imgeql" src="~/UploadedFiles/@Html.DisplayFor(modelItem => item.hinhAnh)" alt="Image" />
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.moTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DanhMuc.tenDanhMuc)
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.sanPhamID }, new { @class = "btn btn-primary col-md-offset-2 col-md-10 btb " })
+
+
+                @Html.ActionLink("Details", "Details", new { id = item.sanPhamID }, new { @class = "btn btn-primary col-md-offset-2 col-md-10 btb" })
+
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.sanPhamID }, new { @class = "btn btn-primary col-md-offset-2 col-md-10 " })
+
+
+
+            </td>
+        </tr>
+    }
+
+</table>
