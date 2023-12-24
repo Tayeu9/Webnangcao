@@ -17,8 +17,8 @@ namespace SHOPHVT
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
-            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
-            this.GioHangs = new HashSet<GioHang>();
+            this.ChiTietHoaDon = new HashSet<ChiTietHoaDon>();
+            this.GioHang = new HashSet<GioHang>();
         }
     
         public int sanPhamID { get; set; }
@@ -30,9 +30,9 @@ namespace SHOPHVT
         public Nullable<int> danhMucID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDon { get; set; }
         public virtual DanhMuc DanhMuc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GioHang> GioHangs { get; set; }
+        public virtual ICollection<GioHang> GioHang { get; set; }
     }
 }

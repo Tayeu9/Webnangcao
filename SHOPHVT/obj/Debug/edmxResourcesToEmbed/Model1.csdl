@@ -166,7 +166,7 @@
   </Association>
   <EntityContainer Name="DB_HVTShopEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ChiTietHoaDons" EntityType="Self.ChiTietHoaDon" />
-    <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
+    <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" />
     <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
     <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
     <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
@@ -181,7 +181,7 @@
       <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
     </AssociationSet>
     <AssociationSet Name="FK__SanPham__danhMuc__3D5E1FD2" Association="Self.FK__SanPham__danhMuc__3D5E1FD2">
-      <End Role="DanhMuc" EntitySet="DanhMucs" />
+      <End Role="DanhMuc" EntitySet="DanhMuc" />
       <End Role="SanPham" EntitySet="SanPhams" />
     </AssociationSet>
     <AssociationSet Name="FK__GioHang__sanpham__412EB0B6" Association="Self.FK__GioHang__sanpham__412EB0B6">

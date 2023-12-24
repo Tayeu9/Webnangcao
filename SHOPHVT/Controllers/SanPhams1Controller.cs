@@ -13,12 +13,12 @@ namespace SHOPHVT.Controllers
 {
     public class SanPhams1Controller : Controller
     {
-        private DB_HVTShopEntities db = new DB_HVTShopEntities();
+        private db_DB_HVTShopEntities db = new db_DB_HVTShopEntities();
 
         // GET: SanPhams1
         public ActionResult Index()
         {
-            var sanPhams = db.SanPhams.Include(s => s.DanhMuc);
+            var sanPhams = db.SanPham.Include(s => s.DanhMuc);
             return View(sanPhams.ToList());
         }
 
@@ -29,7 +29,7 @@ namespace SHOPHVT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
+            SanPham sanPham = db.SanPham.Find(id);
             if (sanPham == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace SHOPHVT.Controllers
         // GET: SanPhams1/Create
         public ActionResult Create()
         {
-            ViewBag.danhMucID = new SelectList(db.DanhMucs, "danhMucID", "tenDanhMuc");
+            ViewBag.danhMucID = new SelectList(db.DanhMuc, "danhMucID", "tenDanhMuc");
             return View();
         }
 
@@ -74,12 +74,12 @@ namespace SHOPHVT.Controllers
             {
 
 
-                db.SanPhams.Add(sanPham);
+                db.SanPham.Add(sanPham);
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            ViewBag.danhMucID = new SelectList(db.DanhMucs, "danhMucID", "tenDanhMuc", sanPham.danhMucID);
+            ViewBag.danhMucID = new SelectList(db.DanhMuc, "danhMucID", "tenDanhMuc", sanPham.danhMucID);
             return View(sanPham);
         }
 
@@ -90,12 +90,12 @@ namespace SHOPHVT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
+            SanPham sanPham = db.SanPham.Find(id);
             if (sanPham == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.danhMucID = new SelectList(db.DanhMucs, "danhMucID", "tenDanhMuc", sanPham.danhMucID);
+            ViewBag.danhMucID = new SelectList(db.DanhMuc, "danhMucID", "tenDanhMuc", sanPham.danhMucID);
             return View(sanPham);
         }
 
@@ -132,7 +132,7 @@ namespace SHOPHVT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.danhMucID = new SelectList(db.DanhMucs, "danhMucID", "tenDanhMuc", sanPham.danhMucID);
+            ViewBag.danhMucID = new SelectList(db.DanhMuc, "danhMucID", "tenDanhMuc", sanPham.danhMucID);
             return View(sanPham);
         }
 
@@ -143,7 +143,7 @@ namespace SHOPHVT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
+            SanPham sanPham = db.SanPham.Find(id);
             if (sanPham == null)
             {
                 return HttpNotFound();
@@ -156,8 +156,8 @@ namespace SHOPHVT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
+            SanPham sanPham = db.SanPham.Find(id);
+            db.SanPham.Remove(sanPham);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

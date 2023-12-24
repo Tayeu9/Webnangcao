@@ -10,7 +10,7 @@ namespace SHOPHVT.Controllers
 {
     public class HomeController : Controller
     {
-        private DB_HVTShopEntities _db = new DB_HVTShopEntities();
+        private db_DB_HVTShopEntities _db = new db_DB_HVTShopEntities();
        
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -42,7 +42,7 @@ namespace SHOPHVT.Controllers
             if (khachhang.hoTen != null && khachhang.ngaySinh != null && khachhang.gioiTinh != null && khachhang.email != null && khachhang.diaChi != null && khachhang.tenDangNhap != null && khachhang.matKhau != null)
             {
                 
-                _db.KhachHangs.Add(khachhang);
+                _db.KhachHang.Add(khachhang);
                 _db.SaveChanges();
                 TempData["ErrorMessage"] = "Đăng kí thành công mời bạn đăng nhập";
                 return RedirectToAction("Dangnhap");
@@ -67,7 +67,7 @@ namespace SHOPHVT.Controllers
           
             var emailF = khachhang.email;
             var matkhauF = khachhang.matKhau;
-            var check = _db.KhachHangs.SingleOrDefault(x => x.email.Equals(emailF) && x.matKhau.Equals(matkhauF));
+            var check = _db.KhachHang.SingleOrDefault(x => x.email.Equals(emailF) && x.matKhau.Equals(matkhauF));
             if (check != null)
             {
                 Session["KhachHang"] = check;

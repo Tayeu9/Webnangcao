@@ -17,7 +17,7 @@ namespace SHOPHVT
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HoaDon()
         {
-            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            this.ChiTietHoaDon = new HashSet<ChiTietHoaDon>();
         }
     
         public int hoaDonID { get; set; }
@@ -25,7 +25,7 @@ namespace SHOPHVT
         public int khachHangID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDon { get; set; }
         public virtual KhachHang KhachHang { get; set; }
     }
 }

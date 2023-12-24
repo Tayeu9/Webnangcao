@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB_HVTShopModelStoreContainer" CdmEntityContainer="DB_HVTShopEntities">
-    <EntitySetMapping Name="ChiTietHoaDons">
+  <EntityContainerMapping StorageEntityContainer="DB_HVTShopModelStoreContainer" CdmEntityContainer="db_DB_HVTShopEntities">
+    <EntitySetMapping Name="ChiTietHoaDon">
       <EntityTypeMapping TypeName="DB_HVTShopModel.ChiTietHoaDon">
         <MappingFragment StoreEntitySet="ChiTietHoaDon">
           <ScalarProperty Name="chiTietHoaDonID" ColumnName="chiTietHoaDonID" />
@@ -21,7 +21,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GioHangs">
+    <EntitySetMapping Name="GioHang">
       <EntityTypeMapping TypeName="DB_HVTShopModel.GioHang">
         <MappingFragment StoreEntitySet="GioHang">
           <ScalarProperty Name="gioHangID" ColumnName="gioHangID" />
@@ -31,7 +31,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HoaDons">
+    <EntitySetMapping Name="HoaDon">
       <EntityTypeMapping TypeName="DB_HVTShopModel.HoaDon">
         <MappingFragment StoreEntitySet="HoaDon">
           <ScalarProperty Name="hoaDonID" ColumnName="hoaDonID" />
@@ -40,7 +40,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="KhachHangs">
+    <EntitySetMapping Name="KhachHang">
       <EntityTypeMapping TypeName="DB_HVTShopModel.KhachHang">
         <MappingFragment StoreEntitySet="KhachHang">
           <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
@@ -54,7 +54,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="QuanTriViens">
+    <EntitySetMapping Name="QuanTriVien">
       <EntityTypeMapping TypeName="DB_HVTShopModel.QuanTriVien">
         <MappingFragment StoreEntitySet="QuanTriVien">
           <ScalarProperty Name="taiKhoanID" ColumnName="taiKhoanID" />
@@ -63,7 +63,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SanPhams">
+    <EntitySetMapping Name="SanPham">
       <EntityTypeMapping TypeName="DB_HVTShopModel.SanPham">
         <MappingFragment StoreEntitySet="SanPham">
           <ScalarProperty Name="sanPhamID" ColumnName="sanPhamID" />
@@ -76,61 +76,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="ProcDeleteSanPham" FunctionName="DB_HVTShopModel.Store.ProcDeleteSanPham">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcDeleteSanPham_Result">
-          <ScalarProperty Name="taiKhoanID" ColumnName="taiKhoanID" />
-          <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
-          <ScalarProperty Name="matKhau" ColumnName="matKhau" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ProcGetDanhMuc" FunctionName="DB_HVTShopModel.Store.ProcGetDanhMuc">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetDanhMuc_Result">
-          <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
-          <ScalarProperty Name="tenDanhMuc" ColumnName="tenDanhMuc" />
-          <ScalarProperty Name="moTa" ColumnName="moTa" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ProcGetGioHang" FunctionName="DB_HVTShopModel.Store.ProcGetGioHang">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetGioHang_Result">
-          <ScalarProperty Name="gioHangID" ColumnName="gioHangID" />
-          <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
-          <ScalarProperty Name="sanphamID" ColumnName="sanphamID" />
-          <ScalarProperty Name="soLuong" ColumnName="soLuong" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ProcGetSanPham" FunctionName="DB_HVTShopModel.Store.ProcGetSanPham">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetSanPham_Result">
-          <ScalarProperty Name="sanPhamID" ColumnName="sanPhamID" />
-          <ScalarProperty Name="tenSanPham" ColumnName="tenSanPham" />
-          <ScalarProperty Name="donGia" ColumnName="donGia" />
-          <ScalarProperty Name="soLuong" ColumnName="soLuong" />
-          <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
-          <ScalarProperty Name="moTa" ColumnName="moTa" />
-          <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ProcGetSanPhamDanhMuc" FunctionName="DB_HVTShopModel.Store.ProcGetSanPhamDanhMuc">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetSanPhamDanhMuc_Result">
-          <ScalarProperty Name="sanPhamID" ColumnName="sanPhamID" />
-          <ScalarProperty Name="tenSanPham" ColumnName="tenSanPham" />
-          <ScalarProperty Name="donGia" ColumnName="donGia" />
-          <ScalarProperty Name="soLuong" ColumnName="soLuong" />
-          <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
-          <ScalarProperty Name="moTa" ColumnName="moTa" />
-          <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ProcInsertSanPham" FunctionName="DB_HVTShopModel.Store.ProcInsertSanPham" />
-    <FunctionImportMapping FunctionImportName="ProcUpdateSanPham" FunctionName="DB_HVTShopModel.Store.ProcUpdateSanPham" />
   </EntityContainerMapping>
 </Mapping>

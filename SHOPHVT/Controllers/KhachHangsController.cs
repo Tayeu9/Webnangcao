@@ -12,12 +12,12 @@ namespace SHOPHVT.Controllers
 {
     public class KhachHangsController : Controller
     {
-        private DB_HVTShopEntities db = new DB_HVTShopEntities();
+        private db_DB_HVTShopEntities db = new db_DB_HVTShopEntities();
 
         // GET: KhachHangs
         public ActionResult Index()
         {
-            return View(db.KhachHangs.ToList());
+            return View(db.KhachHang.ToList());
         }
 
         // GET: KhachHangs/Details/5
@@ -27,7 +27,7 @@ namespace SHOPHVT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
+            KhachHang khachHang = db.KhachHang.Find(id);
             if (khachHang == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace SHOPHVT.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.KhachHangs.Add(khachHang);
+                db.KhachHang.Add(khachHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace SHOPHVT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
+            KhachHang khachHang = db.KhachHang.Find(id);
             if (khachHang == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace SHOPHVT.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
+            KhachHang khachHang = db.KhachHang.Find(id);
             if (khachHang == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace SHOPHVT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            db.KhachHangs.Remove(khachHang);
+            KhachHang khachHang = db.KhachHang.Find(id);
+            db.KhachHang.Remove(khachHang);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
