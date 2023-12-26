@@ -19,28 +19,28 @@
         <div class="row justify-content-center">
             <div class="col-md-10 mb-5 text-center">
                 <ul class="product-category">
-                    <li><a href="#" class="active" >All</a></li>
-                    @foreach (var item in new db_DB_HVTShopEntities().DanhMuc)
+                    <li>@Html.ActionLink("All", "Index", "Product", new { categoryId = (int?)null }, ViewBag.SelectedCategory == null ? new { @class = "active" } : null)</li>
+                    @foreach (var item in ViewBag.Categories)
                     {
                         <li>
-                            <a href="#"> @Html.DisplayFor(modelItem => item.tenDanhMuc)</a>
+                            @Html.ActionLink((string)item.tenDanhMuc, "Index", "Product", new { categoryId = (int)item.danhMucID }, ViewBag.SelectedCategory == item.danhMucID ? new { @class = "active" } : null)
                         </li>
                     }
                 </ul>
             </div>
         </div>
         <div class="row">
-            @foreach (var item in new db_DB_HVTShopEntities().SanPham)
+            @foreach (var item in Model)
             {
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod">
-                            <img class="img-fluid" src="../UploadedFiles/@item.hinhAnh" alt="Colorlib Template">
-                            <span class="status">30%</span>
+                            <img class="img-fluid" src="~/UploadedFiles/@item.hinhAnh" alt="Colorlib Template">
+                      
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">@Html.ActionLink(item.tenSanPham, "Details", new { id = item.sanPhamID })</a></h3>
+                            <h3><a href="#">@Html.ActionLink((string)item.tenSanPham, "Details", new { id = (int)item.SanPhamID })</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span class="price-sale">@item.donGia.ToString("N2") đ</span></p>
@@ -63,7 +63,6 @@
                     </div>
                 </div>
             }
-
         </div>
     </div>
 </section>
