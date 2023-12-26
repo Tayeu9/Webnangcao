@@ -113,16 +113,18 @@ namespace DIENTU.Controllers
             }
             return itongtien;
         }
-        public ActionResult Paycheck()
+        public ActionResult Paycheck(String email)
         {
-            var cart = Session[CartSession];
-            var list = new List<CartItem>();
-            if (cart != null)
+            var user = db.KhachHangs.FirstOrDefault(u => u.email == email);
+
+            if (user != null)
             {
-                list = (List<CartItem>)cart;
+                ViewBag.CustomerName = user.hoTen;
+                ViewBag.CustomerEmail = user.email;
+                ViewBag.DiaChi = user.diaChi;
             }
             ViewBag.Tongtien = Tongtien();
-            return View(list);
+            return View();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace DIENTU.Controllers
                 return HttpNotFound();
               
             }
+            ViewBag.SL = 1;
             return View(sanPham);
         }
     }
