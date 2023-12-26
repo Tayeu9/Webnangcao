@@ -1,0 +1,10 @@
+USE DB_HVTShop
+GO
+
+CREATE PROC ProcGetRowCountHH
+AS
+BEGIN
+	SELECT COUNT(*)
+	FROM dbo.SanPham
+	WHERE soLuong <= 5 
+END

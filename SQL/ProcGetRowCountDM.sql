@@ -1,0 +1,9 @@
+USE DB_HVTShop
+GO
+
+CREATE PROC ProcGetRowCountDM
+AS
+BEGIN
+	SELECT COUNT(*)
+	FROM dbo.DanhMuc
+END

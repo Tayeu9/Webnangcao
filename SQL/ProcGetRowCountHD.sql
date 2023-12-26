@@ -1,0 +1,9 @@
+USE DB_HVTShop
+GO
+
+CREATE PROC ProcGetRowCountHD
+AS
+BEGIN
+	SELECT COUNT(*)
+	FROM dbo.HoaDon
+END

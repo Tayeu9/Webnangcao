@@ -1,0 +1,10 @@
+USE DB_HVTShop
+
+GO
+
+CREATE PROC ProcGetRowCountSP
+AS
+BEGIN
+	SELECT COUNT(*)
+	FROM dbo.SanPham
+END
