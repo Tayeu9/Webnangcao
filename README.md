@@ -1,1 +1,3 @@
 # Webnangcao
+### Missing features:
+- Dashboard
