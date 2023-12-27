@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Cập nhật thông tin";
+}
+
+    <div class="hero-wrap hero-bread" style="background-image: url('../images/bg_1.jpg');">
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="@Url.Action("", "TrangChu")">Trang chủ</a></span> <span>Tài khoản</span></p>
+                    <h1 class="mb-0 bread">Cập nhật thông tin tài khoản</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @model SHOPHVT.Models.Customer
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 ftco-animate">
+                    <form method="post" class="billing-form">
+                        <h3 class="mb-4 billing-heading">Cập nhật thông tin tài khoản</h3>
+                        <div class="row align-items-end">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="FullName">Tên</label>
+                                    <input name="FullName" type="text" class="form-control" placeholder="" value="@Model.FullName">
+                                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class="text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="PhoneNumber">Số điện thoại</label>
+                                    <input name="PhoneNumber" type="text" class="form-control" placeholder="" value="@Model.PhoneNumber">
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input name="Email" type="text" class="form-control" placeholder="" value="@Model.Email">
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Address">Address</label>
+                                    <input name="Address" type="text" class="form-control" placeholder="" value="@Model.Address">
+                                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Birthday">Ngày sinh</label>
+                                    <input name="Birthday" type="date" class="form-control" placeholder="" value="@Model.Birthday.ToString("yyyy-MM-dd")">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Gender">Giới tính</label>
+                                    @*<input name="Gender" type="text" class="form-control" placeholder="" value="@Model.Gender">*@
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="Gender" id="Gender" class="form-control">
+                                            <option selected="selected">Nam</option>
+                                            <option>Nữ</option>
+                                            <option>Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input name="ID" type="hidden" class="form-control" placeholder="" value="@Model.ID">
+                            <input name="Username" type="hidden" class="form-control" placeholder="" value="@Model.Username">
+                            <input name="Password" type="hidden" class="form-control" placeholder="" value="@Model.Password">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary py-2 px-3">Cập nhật</button>
+                                @Html.ActionLink("Trở về", "Index", "Customer", null, new { @class = "info btn btn-primary py-2 px-3" })
+                            </div>
+                        </div>
+                    </form><!-- END -->
+                </div>
+            </div>
+        </div>
+    </section> <!-- .section -->

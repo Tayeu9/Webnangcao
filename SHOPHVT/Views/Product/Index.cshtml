@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="hero-wrap hero-bread" style="background-image: url('../images/bg_1.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="@Url.Action("", "TrangChu")">Trang chủ</a></span> <span>Sản phẩm</span></p>
+                <h1 class="mb-0 bread">Sản phẩm</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 mb-5 text-center">
+                <ul class="product-category">
+                    <li>@Html.ActionLink("All", "Index", "Product", new { categoryId = (int?)null }, ViewBag.SelectedCategory == null ? new { @class = "active" } : null)</li>
+                    @foreach (var item in ViewBag.Categories)
+                    {
+                        <li>
+                            @Html.ActionLink((string)item.tenDanhMuc, "Index", "Product", new { categoryId = (int)item.danhMucID }, ViewBag.SelectedCategory == item.danhMucID ? new { @class = "active" } : null)
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="@Url.Action("Details", "Product", new { id = (int)item.SanPhamID })" class="img-prod">
+                            <img class="img-fluid" src="~/images/@item.hinhAnh" alt="Colorlib Template">
+                      
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3 style="height:40px"><a href="@Url.Action("Details", "Product", new { id = (int)item.SanPhamID })">@item.tenSanPham</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price"><span class="price-sale">@item.donGia.ToString("N2") đ</span></p>
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    @*<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>*@
+                                    @using (Html.BeginForm("AddItem", "Cart", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("productId", (int)item.SanPhamID)
+                                        <input type="hidden" id="quantityHidden" name="quantity" class="form-control input-number" value="1" />
+                                        <button type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                            <span><i class="ion-ios-cart"></i></span>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

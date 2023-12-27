@@ -1,0 +1,729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_HVTShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChiTietHoaDon">
+          <Key>
+            <PropertyRef Name="chiTietHoaDonID" />
+          </Key>
+          <Property Name="chiTietHoaDonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hoaDonID" Type="int" Nullable="false" />
+          <Property Name="sanphamID" Type="int" Nullable="false" />
+          <Property Name="soLuong" Type="int" Nullable="false" />
+          <Property Name="donGia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DanhMuc">
+          <Key>
+            <PropertyRef Name="danhMucID" />
+          </Key>
+          <Property Name="danhMucID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenDanhMuc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="moTa" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="gioHangID" />
+          </Key>
+          <Property Name="gioHangID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="khachHangID" Type="int" Nullable="false" />
+          <Property Name="sanphamID" Type="int" Nullable="false" />
+          <Property Name="soLuong" Type="int" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="hoaDonID" />
+          </Key>
+          <Property Name="hoaDonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ngayTao" Type="date" Nullable="false" />
+          <Property Name="khachHangID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="khachHangID" />
+          </Key>
+          <Property Name="khachHangID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngaySinh" Type="date" />
+          <Property Name="gioiTinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="soDienThoai" Type="varchar" MaxLength="10" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="diaChi" Type="nvarchar" MaxLength="200" />
+          <Property Name="tenDangNhap" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="matKhau" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuanTriVien">
+          <Key>
+            <PropertyRef Name="taiKhoanID" />
+          </Key>
+          <Property Name="taiKhoanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenDangNhap" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="matKhau" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SanPham">
+          <Key>
+            <PropertyRef Name="sanPhamID" />
+          </Key>
+          <Property Name="sanPhamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenSanPham" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="donGia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="soLuong" Type="int" Nullable="false" />
+          <Property Name="hinhAnh" Type="varchar" MaxLength="50" />
+          <Property Name="moTa" Type="nvarchar" MaxLength="200" />
+          <Property Name="danhMucID" Type="int" />
+        </EntityType>
+        <Association Name="FK__ChiTietHo__donGi__47DBAE45">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="hoaDonID" />
+            </Principal>
+            <Dependent Role="ChiTietHoaDon">
+              <PropertyRef Name="hoaDonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietHo__sanph__48CFD27E">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="sanPhamID" />
+            </Principal>
+            <Dependent Role="ChiTietHoaDon">
+              <PropertyRef Name="sanphamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__sanpham__412EB0B6">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="sanPhamID" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="sanphamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__soLuong__403A8C7D">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="khachHangID" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="khachHangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__khachHan__44FF419A">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="khachHangID" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="khachHangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SanPham__danhMuc__3D5E1FD2">
+          <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DanhMuc">
+              <PropertyRef Name="danhMucID" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="danhMucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ProcDeleteSanPham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sanPhamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcGetDanhMuc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="danhMucID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcGetGioHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khachHangID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcGetNameAndNumSPOfDM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetNumMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountDM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountHH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetSanPham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sanPhamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcGetSanPhamDanhMuc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="danhMucID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcInsertSanPham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenSanPham" Type="nvarchar" Mode="In" />
+          <Parameter Name="donGia" Type="numeric" Mode="In" />
+          <Parameter Name="soLuong" Type="int" Mode="In" />
+          <Parameter Name="hinhAnh" Type="varchar" Mode="In" />
+          <Parameter Name="moTa" Type="nvarchar" Mode="In" />
+          <Parameter Name="danhMucID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcUpdateKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khachHangID" Type="int" Mode="In" />
+          <Parameter Name="hoTen" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaySinh" Type="date" Mode="In" />
+          <Parameter Name="gioiTinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="soDienThoai" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="diaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="matKhau" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProcUpdateKhachHangMatKhau" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khachHangID" Type="int" Mode="In" />
+          <Parameter Name="matKhau" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProcUpdateSanPham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sanPhamID" Type="int" Mode="In" />
+          <Parameter Name="tenSanPham" Type="nvarchar" Mode="In" />
+          <Parameter Name="donGia" Type="numeric" Mode="In" />
+          <Parameter Name="soLuong" Type="int" Mode="In" />
+          <Parameter Name="hinhAnh" Type="varchar" Mode="In" />
+          <Parameter Name="moTa" Type="nvarchar" Mode="In" />
+          <Parameter Name="danhMucID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DB_HVTShopModelStoreContainer">
+          <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuanTriVien" EntityType="Self.QuanTriVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChiTietHo__donGi__47DBAE45" Association="Self.FK__ChiTietHo__donGi__47DBAE45">
+            <End Role="HoaDon" EntitySet="HoaDon" />
+            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietHo__sanph__48CFD27E" Association="Self.FK__ChiTietHo__sanph__48CFD27E">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__sanpham__412EB0B6" Association="Self.FK__GioHang__sanpham__412EB0B6">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="GioHang" EntitySet="GioHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__soLuong__403A8C7D" Association="Self.FK__GioHang__soLuong__403A8C7D">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="GioHang" EntitySet="GioHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__khachHan__44FF419A" Association="Self.FK__HoaDon__khachHan__44FF419A">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SanPham__danhMuc__3D5E1FD2" Association="Self.FK__SanPham__danhMuc__3D5E1FD2">
+            <End Role="DanhMuc" EntitySet="DanhMuc" />
+            <End Role="SanPham" EntitySet="SanPham" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_HVTShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChiTietHoaDon">
+          <Key>
+            <PropertyRef Name="chiTietHoaDonID" />
+          </Key>
+          <Property Name="chiTietHoaDonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hoaDonID" Type="Int32" Nullable="false" />
+          <Property Name="sanphamID" Type="Int32" Nullable="false" />
+          <Property Name="soLuong" Type="Int32" Nullable="false" />
+          <Property Name="donGia" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK__ChiTietHo__donGi__34C8D9D1" FromRole="ChiTietHoaDon" ToRole="HoaDon" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietHo__sanph__35BCFE0A" FromRole="ChiTietHoaDon" ToRole="SanPham" />
+        </EntityType>
+        <EntityType Name="DanhMuc">
+          <Key>
+            <PropertyRef Name="danhMucID" />
+          </Key>
+          <Property Name="danhMucID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenDanhMuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="moTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__danhMuc__2A4B4B5E" FromRole="DanhMuc" ToRole="SanPham" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="gioHangID" />
+          </Key>
+          <Property Name="gioHangID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="khachHangID" Type="Int32" Nullable="false" />
+          <Property Name="sanphamID" Type="Int32" Nullable="false" />
+          <Property Name="soLuong" Type="Int32" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__GioHang__sanpham__2E1BDC42" FromRole="GioHang" ToRole="SanPham" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__GioHang__soLuong__2D27B809" FromRole="GioHang" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="HoaDon">
+          <Key>
+            <PropertyRef Name="hoaDonID" />
+          </Key>
+          <Property Name="hoaDonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ngayTao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="khachHangID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK__ChiTietHo__donGi__34C8D9D1" FromRole="HoaDon" ToRole="ChiTietHoaDon" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__HoaDon__khachHan__31EC6D26" FromRole="HoaDon" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="khachHangID" />
+          </Key>
+          <Property Name="khachHangID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaySinh" Type="DateTime" Precision="0" />
+          <Property Name="gioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="diaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="matKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__soLuong__2D27B809" FromRole="KhachHang" ToRole="GioHang" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__khachHan__31EC6D26" FromRole="KhachHang" ToRole="HoaDon" />
+          <Property Name="soDienThoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="QuanTriVien">
+          <Key>
+            <PropertyRef Name="taiKhoanID" />
+          </Key>
+          <Property Name="taiKhoanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="matKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SanPham">
+          <Key>
+            <PropertyRef Name="sanPhamID" />
+          </Key>
+          <Property Name="sanPhamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenSanPham" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="donGia" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="soLuong" Type="Int32" Nullable="false" />
+          <Property Name="hinhAnh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="moTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="danhMucID" Type="Int32" />
+          <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK__ChiTietHo__sanph__35BCFE0A" FromRole="SanPham" ToRole="ChiTietHoaDon" />
+          <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__danhMuc__2A4B4B5E" FromRole="SanPham" ToRole="DanhMuc" />
+          <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__sanpham__2E1BDC42" FromRole="SanPham" ToRole="GioHang" />
+        </EntityType>
+        <Association Name="FK__ChiTietHo__donGi__34C8D9D1">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="hoaDonID" />
+            </Principal>
+            <Dependent Role="ChiTietHoaDon">
+              <PropertyRef Name="hoaDonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietHo__sanph__35BCFE0A">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="sanPhamID" />
+            </Principal>
+            <Dependent Role="ChiTietHoaDon">
+              <PropertyRef Name="sanphamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SanPham__danhMuc__2A4B4B5E">
+          <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DanhMuc">
+              <PropertyRef Name="danhMucID" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="danhMucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__sanpham__2E1BDC42">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="sanPhamID" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="sanphamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__soLuong__2D27B809">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="khachHangID" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="khachHangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__khachHan__31EC6D26">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="khachHangID" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="khachHangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_HVTShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChiTietHoaDons" EntityType="Self.ChiTietHoaDon" />
+          <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
+          <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
+          <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="QuanTriViens" EntityType="Self.QuanTriVien" />
+          <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
+          <AssociationSet Name="FK__ChiTietHo__donGi__34C8D9D1" Association="Self.FK__ChiTietHo__donGi__34C8D9D1">
+            <End Role="HoaDon" EntitySet="HoaDons" />
+            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietHo__sanph__35BCFE0A" Association="Self.FK__ChiTietHo__sanph__35BCFE0A">
+            <End Role="SanPham" EntitySet="SanPhams" />
+            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SanPham__danhMuc__2A4B4B5E" Association="Self.FK__SanPham__danhMuc__2A4B4B5E">
+            <End Role="DanhMuc" EntitySet="DanhMucs" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__sanpham__2E1BDC42" Association="Self.FK__GioHang__sanpham__2E1BDC42">
+            <End Role="SanPham" EntitySet="SanPhams" />
+            <End Role="GioHang" EntitySet="GioHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__soLuong__2D27B809" Association="Self.FK__GioHang__soLuong__2D27B809">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="GioHang" EntitySet="GioHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__khachHan__31EC6D26" Association="Self.FK__HoaDon__khachHan__31EC6D26">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <FunctionImport Name="ProcDeleteSanPham" ReturnType="Collection(DB_HVTShopModel.ProcDeleteSanPham_Result)">
+          <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcGetDanhMuc" ReturnType="Collection(DB_HVTShopModel.ProcGetDanhMuc_Result)">
+          <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcGetGioHang" ReturnType="Collection(DB_HVTShopModel.ProcGetGioHang_Result)">
+          <Parameter Name="khachHangID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcGetSanPham" ReturnType="Collection(DB_HVTShopModel.ProcGetSanPham_Result)">
+          <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcGetSanPhamDanhMuc" ReturnType="Collection(DB_HVTShopModel.ProcGetSanPhamDanhMuc_Result)">
+          <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcInsertSanPham">
+            <Parameter Name="tenSanPham" Mode="In" Type="String" />
+            <Parameter Name="donGia" Mode="In" Type="Decimal" />
+            <Parameter Name="soLuong" Mode="In" Type="Int32" />
+            <Parameter Name="hinhAnh" Mode="In" Type="String" />
+            <Parameter Name="moTa" Mode="In" Type="String" />
+            <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcUpdateSanPham">
+            <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
+            <Parameter Name="tenSanPham" Mode="In" Type="String" />
+            <Parameter Name="donGia" Mode="In" Type="Decimal" />
+            <Parameter Name="soLuong" Mode="In" Type="Int32" />
+            <Parameter Name="hinhAnh" Mode="In" Type="String" />
+            <Parameter Name="moTa" Mode="In" Type="String" />
+            <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcGetNameAndNumSPOfDM" ReturnType="Collection(DB_HVTShopModel.ProcGetNameAndNumSPOfDM_Result)" />
+          <FunctionImport Name="ProcGetNumMonth" ReturnType="Collection(DB_HVTShopModel.ProcGetNumMonth_Result)" />
+          <FunctionImport Name="ProcGetRowCountDM" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcGetRowCountHD" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcGetRowCountHH" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcGetRowCountSP" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcUpdateKhachHang">
+            <Parameter Name="khachHangID" Mode="In" Type="Int32" />
+            <Parameter Name="hoTen" Mode="In" Type="String" />
+            <Parameter Name="ngaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="gioiTinh" Mode="In" Type="String" />
+            <Parameter Name="soDienThoai" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="diaChi" Mode="In" Type="String" />
+            <Parameter Name="matKhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProcUpdateKhachHangMatKhau">
+            <Parameter Name="khachHangID" Mode="In" Type="Int32" />
+            <Parameter Name="matKhau" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ProcDeleteSanPham_Result">
+          <Property Type="Int32" Name="taiKhoanID" Nullable="false" />
+          <Property Type="String" Name="tenDangNhap" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="matKhau" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ProcGetDanhMuc_Result">
+          <Property Type="Int32" Name="danhMucID" Nullable="false" />
+          <Property Type="String" Name="tenDanhMuc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="moTa" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="ProcGetGioHang_Result">
+          <Property Type="Int32" Name="gioHangID" Nullable="false" />
+          <Property Type="Int32" Name="khachHangID" Nullable="false" />
+          <Property Type="Int32" Name="sanphamID" Nullable="false" />
+          <Property Type="Int32" Name="soLuong" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcGetSanPham_Result">
+          <Property Type="Int32" Name="sanPhamID" Nullable="false" />
+          <Property Type="String" Name="tenSanPham" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="donGia" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="soLuong" Nullable="false" />
+          <Property Type="String" Name="hinhAnh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="moTa" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="danhMucID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcGetSanPhamDanhMuc_Result">
+          <Property Type="Int32" Name="sanPhamID" Nullable="false" />
+          <Property Type="String" Name="tenSanPham" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="donGia" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="soLuong" Nullable="false" />
+          <Property Type="String" Name="hinhAnh" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="moTa" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="danhMucID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcGetNameAndNumSPOfDM_Result">
+          <Property Type="Int32" Name="danhMucID" Nullable="true" />
+          <Property Type="String" Name="tenDanhMuc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="totalQty" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcGetNumMonth_Result">
+          <Property Type="Int32" Name="month_num" Nullable="true" />
+          <Property Type="String" Name="month_str" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="sum_month" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_HVTShopModelStoreContainer" CdmEntityContainer="DB_HVTShopEntities">
+          <EntitySetMapping Name="ChiTietHoaDons">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.ChiTietHoaDon">
+              <MappingFragment StoreEntitySet="ChiTietHoaDon">
+                <ScalarProperty Name="chiTietHoaDonID" ColumnName="chiTietHoaDonID" />
+                <ScalarProperty Name="hoaDonID" ColumnName="hoaDonID" />
+                <ScalarProperty Name="sanphamID" ColumnName="sanphamID" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="donGia" ColumnName="donGia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhMucs">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.DanhMuc">
+              <MappingFragment StoreEntitySet="DanhMuc">
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+                <ScalarProperty Name="tenDanhMuc" ColumnName="tenDanhMuc" />
+                <ScalarProperty Name="moTa" ColumnName="moTa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GioHangs">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.GioHang">
+              <MappingFragment StoreEntitySet="GioHang">
+                <ScalarProperty Name="gioHangID" ColumnName="gioHangID" />
+                <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
+                <ScalarProperty Name="sanphamID" ColumnName="sanphamID" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoaDons">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.HoaDon">
+              <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="hoaDonID" ColumnName="hoaDonID" />
+                <ScalarProperty Name="ngayTao" ColumnName="ngayTao" />
+                <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="soDienThoai" ColumnName="soDienThoai" />
+                <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
+                <ScalarProperty Name="hoTen" ColumnName="hoTen" />
+                <ScalarProperty Name="ngaySinh" ColumnName="ngaySinh" />
+                <ScalarProperty Name="gioiTinh" ColumnName="gioiTinh" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="diaChi" ColumnName="diaChi" />
+                <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
+                <ScalarProperty Name="matKhau" ColumnName="matKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuanTriViens">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.QuanTriVien">
+              <MappingFragment StoreEntitySet="QuanTriVien">
+                <ScalarProperty Name="taiKhoanID" ColumnName="taiKhoanID" />
+                <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
+                <ScalarProperty Name="matKhau" ColumnName="matKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SanPhams">
+            <EntityTypeMapping TypeName="DB_HVTShopModel.SanPham">
+              <MappingFragment StoreEntitySet="SanPham">
+                <ScalarProperty Name="sanPhamID" ColumnName="sanPhamID" />
+                <ScalarProperty Name="tenSanPham" ColumnName="tenSanPham" />
+                <ScalarProperty Name="donGia" ColumnName="donGia" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
+                <ScalarProperty Name="moTa" ColumnName="moTa" />
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ProcDeleteSanPham" FunctionName="DB_HVTShopModel.Store.ProcDeleteSanPham">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcDeleteSanPham_Result">
+                <ScalarProperty Name="taiKhoanID" ColumnName="taiKhoanID" />
+                <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
+                <ScalarProperty Name="matKhau" ColumnName="matKhau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetDanhMuc" FunctionName="DB_HVTShopModel.Store.ProcGetDanhMuc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetDanhMuc_Result">
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+                <ScalarProperty Name="tenDanhMuc" ColumnName="tenDanhMuc" />
+                <ScalarProperty Name="moTa" ColumnName="moTa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetGioHang" FunctionName="DB_HVTShopModel.Store.ProcGetGioHang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetGioHang_Result">
+                <ScalarProperty Name="gioHangID" ColumnName="gioHangID" />
+                <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
+                <ScalarProperty Name="sanphamID" ColumnName="sanphamID" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetSanPham" FunctionName="DB_HVTShopModel.Store.ProcGetSanPham">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetSanPham_Result">
+                <ScalarProperty Name="sanPhamID" ColumnName="sanPhamID" />
+                <ScalarProperty Name="tenSanPham" ColumnName="tenSanPham" />
+                <ScalarProperty Name="donGia" ColumnName="donGia" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
+                <ScalarProperty Name="moTa" ColumnName="moTa" />
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetSanPhamDanhMuc" FunctionName="DB_HVTShopModel.Store.ProcGetSanPhamDanhMuc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetSanPhamDanhMuc_Result">
+                <ScalarProperty Name="sanPhamID" ColumnName="sanPhamID" />
+                <ScalarProperty Name="tenSanPham" ColumnName="tenSanPham" />
+                <ScalarProperty Name="donGia" ColumnName="donGia" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
+                <ScalarProperty Name="moTa" ColumnName="moTa" />
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcInsertSanPham" FunctionName="DB_HVTShopModel.Store.ProcInsertSanPham" />
+          <FunctionImportMapping FunctionImportName="ProcUpdateSanPham" FunctionName="DB_HVTShopModel.Store.ProcUpdateSanPham" />
+          <FunctionImportMapping FunctionImportName="ProcGetNameAndNumSPOfDM" FunctionName="DB_HVTShopModel.Store.ProcGetNameAndNumSPOfDM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetNameAndNumSPOfDM_Result">
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+                <ScalarProperty Name="tenDanhMuc" ColumnName="tenDanhMuc" />
+                <ScalarProperty Name="totalQty" ColumnName="totalQty" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetNumMonth" FunctionName="DB_HVTShopModel.Store.ProcGetNumMonth">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetNumMonth_Result">
+                <ScalarProperty Name="month_num" ColumnName="month_num" />
+                <ScalarProperty Name="month_str" ColumnName="month_str" />
+                <ScalarProperty Name="sum_month" ColumnName="sum_month" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountDM" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountDM" />
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountHD" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountHD" />
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountHH" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountHH" />
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountSP" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountSP" />
+          <FunctionImportMapping FunctionImportName="ProcUpdateKhachHang" FunctionName="DB_HVTShopModel.Store.ProcUpdateKhachHang" />
+          <FunctionImportMapping FunctionImportName="ProcUpdateKhachHangMatKhau" FunctionName="DB_HVTShopModel.Store.ProcUpdateKhachHangMatKhau" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

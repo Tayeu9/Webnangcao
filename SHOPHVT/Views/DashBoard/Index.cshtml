@@ -1,0 +1,195 @@
+﻿@model SHOPHVT.Controllers.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/Content/dashboard.css">
+}
+
+<!-- Main -->
+<main class="main-container">
+    <div class="main-title">
+        <p class="font-weight-bold">DASHBOARD</p>
+    </div>
+
+    <div class="main-cards">
+
+        <div class="card">
+            <div class="card-inner">
+                <p class="text-primary">PRODUCTS</p>
+                <span class="material-icons-outlined text-blue">inventory_2</span>
+            </div>
+            <span class="text-primary font-weight-bold">@Model.NumSP</span>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <p class="text-primary">CATEGORY</p>
+                <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">@Model.NumCate</span>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <p class="text-primary">SALES ORDERS</p>
+                <span class="material-icons-outlined text-green">shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">@Model.NumHD</span>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <p class="text-primary">OUT OF STOCK ALERTS</p>
+                <span class="material-icons-outlined text-red">notification_important</span>
+            </div>
+            <span class="text-primary font-weight-bold">@Model.NumHH</span>
+        </div>
+
+    </div>
+
+    <div class="charts">
+
+        <div class="charts-card">
+            <p class="chart-title">Top Products</p>
+            <div id="bar-chart"></div>
+        </div>
+
+        <div class="charts-card">
+            <p class="chart-title">Purchase and Sales Orders</p>
+            <div id="area-chart"></div>
+        </div>
+
+    </div>
+</main>
+<!-- End Main -->
+
+
+@section scripts {
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+
+    <!-- Custom JS -->
+    @{
+        string ChartCate = "[" + string.Join(",", Model.NameSP.Select(item => "'" + item + "'")) + "]";
+        string ChartData = "[" + string.Join(",", Model.NumOfCate.Select(item => item)) + "]";
+        string AreaChartLabel = "[" + string.Join(",", Model.Month_STR.Select(item => "'" + item + "'")) + "]";
+        string AreaChartData = "[" + string.Join(",", Model.Month_NUM.Select(item => item)) + "]";
+    }
+
+    <script>
+        var chartData = @Html.Raw(ChartData);
+        var chartCate = @Html.Raw(ChartCate);
+        var areaChartData = @Html.Raw(AreaChartData);
+        var areaChartLabel = @Html.Raw(AreaChartLabel);
+
+        const barChartOptions = {
+            series: [
+                {
+                    data: chartData,
+                },
+            ],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false,
+                },
+            },
+            colors: ['#246dec', '#cc3c43', '#367952', '#f5b74f', '#4f35a1'],
+            plotOptions: {
+                bar: {
+                    distributed: true,
+                    borderRadius: 4,
+                    horizontal: false,
+                    columnWidth: '40%',
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+                show: false,
+            },
+            xaxis: {
+                categories: chartCate,
+            },
+            yaxis: {
+                title: {
+                    text: 'Count',
+                },
+            },
+        };
+
+        const barChart = new ApexCharts(
+            document.querySelector('#bar-chart'),
+            barChartOptions
+        );
+        barChart.render();
+
+        // AREA CHART
+        const areaChartOptions = {
+            series: [
+                {
+                    name: 'Purchase Orders',
+                    data: [31, 40, 28, 51, 42, 109, 100],
+                },
+                {
+                    name: 'Sales Orders',
+                    data: areaChartData,     //[11, 32, 45, 32, 34, 52, 41]
+                },
+            ],
+            chart: {
+                height: 350,
+                type: 'area',
+                toolbar: {
+                    show: false,
+                },
+            },
+            colors: ['#4f35a1', '#246dec'],
+            dataLabels: {
+                enabled: false,
+            },
+            stroke: {
+                curve: 'smooth',
+            },
+            labels: areaChartLabel,     //['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+            markers: {
+                size: 0,
+            },
+            yaxis: [
+                {
+                    title: {
+                        text: 'Purchase Orders',
+                    },
+                },
+                {
+                    opposite: true,
+                    title: {
+                        text: 'Sales Orders',
+                    },
+                },
+            ],
+            tooltip: {
+                shared: true,
+                intersect: false,
+            },
+        };
+
+        const areaChart = new ApexCharts(
+            document.querySelector('#area-chart'),
+            areaChartOptions
+        );
+        areaChart.render();
+    </script>
+}

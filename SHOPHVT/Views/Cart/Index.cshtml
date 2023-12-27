@@ -1,0 +1,125 @@
+﻿@model List<SHOPHVT.Models.CartItem>
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+@if (Model == null || Model.Count == 0)
+{
+    <p class="text-info text-center">
+        Giỏ hàng của bạn rỗng!
+    </p>
+}
+
+<div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="@Url.Action("", "TrangChu")">Trang chủ</a></span> <span>Giỏ hàng</span></p>
+                <h1 class="mb-0 bread">Giỏ hàng</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+
+                                <th>&nbsp;</th>
+                                <th>Product name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr class="text-center">
+                                    <td class="image-prod"><div class="img" style="background-image:url(/images/@item.sanpham.hinhAnh);"></div></td>
+
+                                    <td class="product-name">
+                                        <a>@item.sanpham.tenSanPham)</a>
+
+                                    </td>
+
+                                    <td class="price"><a></a> @item.sanpham.donGia.ToString("#,##0").Replace(',', '.') VND</td>
+                                    @*Chỉnh sửa giỏ hàng gọi về action CapNhatGioHang*@
+                                    @using (Html.BeginForm("CapnhapGiohang", "Cart", new { @productId = item.sanpham.sanPhamID }))
+                                    {
+                                        <td class="quantity">
+                                            <div class="input-group mb-3">
+                                                <a name="quantity" class="quantity form-control input-number"><input type="text" name="txtSoluong" value="@item.Quantity" /></a>
+                                            </div>
+                                        </td>
+
+                                        <td class="total">@(item.sanpham.donGia * item.Quantity)VNĐ</td>
+                                        @*Xóa giỏ hàng gọi về Action XoaGioHang*@
+                                        <td class="product-remove">@Html.ActionLink("Xóa", "Xoagiohang", new { @productId = item.sanpham.sanPhamID })</td>
+                                        <td class="product-remove"><input type="submit" value="Cập nhật" class="btn-secondary" /></td>
+                                    }
+                                </tr><!-- END TR-->
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span><a></a></span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Delivery</span>
+                        <span>@ViewBag.Tongtien VND</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Discount</span>
+                        <span>$0.00</span>
+                    </p>
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span>@ViewBag.Tongtien VND</span>
+                    </p>
+                </div>
+                <p><a href="@Url.Action("Paycheck")" class="btn btn-primary py-3 px-4">Thanh toán</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
+                e.preventDefault();
+                var quantity = parseInt($('#quantity').val());
+                $('#quantity').val(quantity + 1);
+            });
+
+            $('.quantity-left-minus').click(function (e) {
+                e.preventDefault();
+                var quantity = parseInt($('#quantity').val());
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+
+        });
+    </script>
+}
