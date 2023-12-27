@@ -441,7 +441,7 @@
     <Content Include="scss\bootstrap\_variables.scss" />
     <Content Include="scss\style.scss" />
     <Content Include="Views\TrangChu\Index.cshtml" />
-    <Content Include="Views\TrangChu\Details.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\TrangChu\Dangky.cshtml" />
     <Content Include="Views\TrangChu\Dangnhap.cshtml" />

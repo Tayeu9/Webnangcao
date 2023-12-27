@@ -25,6 +25,9 @@
                 Giới tính
             </th>
             <th>
+                SDT
+            </th>
+            <th>
                 Email
             </th>
             <th>
@@ -46,10 +49,14 @@
                     @Html.DisplayFor(modelItem => item.hoTen)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ngaySinh)
+                    @*@Html.DisplayFor(modelItem => item.ngaySinh)*@
+                    @item.ngaySinh.Value.ToString("dd/MM/yyyy")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.gioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soDienThoai)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.email)

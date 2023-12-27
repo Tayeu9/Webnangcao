@@ -16,19 +16,6 @@ namespace SHOPHVT.Controllers
         {
             return View();
         }
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            SanPham sanPham = _db.SanPhams.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sanPham);
-        }
 
         public ActionResult Dangky()
         {

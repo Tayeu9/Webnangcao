@@ -46,7 +46,7 @@ namespace SHOPHVT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "khachHangID,hoTen,ngaySinh,gioiTinh,email,diaChi,tenDangNhap,matKhau")] KhachHang khachHang)
+        public ActionResult Create([Bind(Include = "khachHangID,hoTen,ngaySinh,gioiTinh,soDienThoai,email,diaChi,tenDangNhap,matKhau,soDienThoai")] KhachHang khachHang)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace SHOPHVT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "khachHangID,hoTen,ngaySinh,gioiTinh,email,diaChi,tenDangNhap,matKhau")] KhachHang khachHang)
+        public ActionResult Edit([Bind(Include = "khachHangID,hoTen,ngaySinh,gioiTinh,soDienThoai,email,diaChi,tenDangNhap,matKhau")] KhachHang khachHang)
         {
             if (ModelState.IsValid)
             {

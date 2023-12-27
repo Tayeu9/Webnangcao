@@ -15,7 +15,7 @@
                     <div class="col-md-12 ftco-animate text-center">
                         <h1 class="mb-2">Cung cấp các sản phẩm tốt nhất</h1>
                         <h2 class="subheading mb-4">Chất lượng và uy tín</h2>
-                        <p><a href="#" class="btn btn-primary">Xem chi tiết</a></p>
+                        <p><a href="@Url.Action("", "Product")" class="btn btn-primary">Xem chi tiết</a></p>
                     </div>
 
                 </div>
@@ -89,7 +89,7 @@
                             <div class="text text-center">
                                 <h2>Danh mục</h2>
                                 <p>Đa dạng sản phẩm</p>
-                                <p><a href="#" class="btn btn-primary">Mua sắm</a></p>
+                                <p><a href="@Url.Action("", "Product")" class="btn btn-primary">Mua sắm</a></p>
                             </div>
                         </div>
                     </div>
@@ -136,17 +136,22 @@
     </div>
     <div class="container">
         <div class="row">
+            @{ 
+                int count = 0;
+            }
             @foreach (var item in new DB_HVTShopEntities().SanPhams)
             {
+                if (count >= 4) { break; }
+                count++;
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="@Url.Action("Details", "TrangChu", new { id = item.sanPhamID })" class="img-prod">
+                        <a href="@Url.Action("Details", "Product", new { id = item.sanPhamID })" class="img-prod">
                             <img class="img-fluid" src="~/images/@Html.DisplayFor(modelItem => item.hinhAnh)" alt="Colorlib Template">
                             <span class="status">30%</span>
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="@Url.Action("Details", "TrangChu", new { id = item.sanPhamID })">@Html.DisplayFor(modelItem => item.tenSanPham)</a></h3>
+                            <h3 style="height:40px"><a href="@Url.Action("Details", "Product", new { id = item.sanPhamID })">@Html.DisplayFor(modelItem => item.tenSanPham)</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">@Html.DisplayFor(modelItem => item.donGia)</span></p>
@@ -154,16 +159,17 @@
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    @*<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                            <span><i class="ion-ios-menu"></i></span>
-                                        </a>*@
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    @*<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
-                                    </a>
-                                    @*@Html.ActionLink("Mua", "Details", new { id = item.sanPhamID })*@
-                                    @*<a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                            <span><i class="ion-ios-heart"></i></span>
-                                        </a>*@
+                                    </a>*@
+                                    @using (Html.BeginForm("AddItem", "Cart", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("productId", item.sanPhamID)
+                                        <input type="hidden" id="quantityHidden" name="quantity" class="form-control input-number" value="1" />
+                                        <button type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                            <span><i class="ion-ios-cart"></i></span>
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>

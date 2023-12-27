@@ -121,6 +121,7 @@ namespace SHOPHVT.Controllers
             if (user != null)
             {
                 ViewBag.CustomerName = user.hoTen;
+                ViewBag.CustomerPhoneNumber = user.soDienThoai;
                 ViewBag.CustomerEmail = user.email;
                 ViewBag.CustomerAddress = user.diaChi;
             }
