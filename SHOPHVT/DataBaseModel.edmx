@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_HVTShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_HVTShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietHoaDon">
           <Key>
             <PropertyRef Name="chiTietHoaDonID" />
@@ -48,10 +48,11 @@
           <Property Name="hoTen" Type="nvarchar" MaxLength="50" />
           <Property Name="ngaySinh" Type="date" />
           <Property Name="gioiTinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="soDienThoai" Type="varchar" MaxLength="10" />
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="diaChi" Type="nvarchar" MaxLength="200" />
           <Property Name="tenDangNhap" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="matKhau" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="matKhau" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="QuanTriVien">
           <Key>
@@ -73,7 +74,7 @@
           <Property Name="moTa" Type="nvarchar" MaxLength="200" />
           <Property Name="danhMucID" Type="int" />
         </EntityType>
-        <Association Name="FK__ChiTietHo__donGi__34C8D9D1">
+        <Association Name="FK__ChiTietHo__donGi__47DBAE45">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -87,7 +88,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChiTietHo__sanph__35BCFE0A">
+        <Association Name="FK__ChiTietHo__sanph__48CFD27E">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -101,7 +102,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GioHang__sanpham__2E1BDC42">
+        <Association Name="FK__GioHang__sanpham__412EB0B6">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -115,7 +116,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GioHang__soLuong__2D27B809">
+        <Association Name="FK__GioHang__soLuong__403A8C7D">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -129,7 +130,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__khachHan__31EC6D26">
+        <Association Name="FK__HoaDon__khachHan__44FF419A">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -143,7 +144,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__danhMuc__2A4B4B5E">
+        <Association Name="FK__SanPham__danhMuc__3D5E1FD2">
           <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -166,6 +167,12 @@
         <Function Name="ProcGetGioHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="khachHangID" Type="int" Mode="In" />
         </Function>
+        <Function Name="ProcGetNameAndNumSPOfDM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetNumMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountDM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountHH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ProcGetRowCountSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ProcGetSanPham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sanPhamID" Type="int" Mode="In" />
         </Function>
@@ -179,6 +186,20 @@
           <Parameter Name="hinhAnh" Type="varchar" Mode="In" />
           <Parameter Name="moTa" Type="nvarchar" Mode="In" />
           <Parameter Name="danhMucID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcUpdateKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khachHangID" Type="int" Mode="In" />
+          <Parameter Name="hoTen" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaySinh" Type="date" Mode="In" />
+          <Parameter Name="gioiTinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="soDienThoai" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="diaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="matKhau" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProcUpdateKhachHangMatKhau" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khachHangID" Type="int" Mode="In" />
+          <Parameter Name="matKhau" Type="varchar" Mode="In" />
         </Function>
         <Function Name="ProcUpdateSanPham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sanPhamID" Type="int" Mode="In" />
@@ -197,33 +218,32 @@
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuanTriVien" EntityType="Self.QuanTriVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ChiTietHo__donGi__34C8D9D1" Association="Self.FK__ChiTietHo__donGi__34C8D9D1">
+          <AssociationSet Name="FK__ChiTietHo__donGi__47DBAE45" Association="Self.FK__ChiTietHo__donGi__47DBAE45">
             <End Role="HoaDon" EntitySet="HoaDon" />
             <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChiTietHo__sanph__35BCFE0A" Association="Self.FK__ChiTietHo__sanph__35BCFE0A">
+          <AssociationSet Name="FK__ChiTietHo__sanph__48CFD27E" Association="Self.FK__ChiTietHo__sanph__48CFD27E">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__GioHang__sanpham__2E1BDC42" Association="Self.FK__GioHang__sanpham__2E1BDC42">
+          <AssociationSet Name="FK__GioHang__sanpham__412EB0B6" Association="Self.FK__GioHang__sanpham__412EB0B6">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="GioHang" EntitySet="GioHang" />
           </AssociationSet>
-          <AssociationSet Name="FK__GioHang__soLuong__2D27B809" Association="Self.FK__GioHang__soLuong__2D27B809">
+          <AssociationSet Name="FK__GioHang__soLuong__403A8C7D" Association="Self.FK__GioHang__soLuong__403A8C7D">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="GioHang" EntitySet="GioHang" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__khachHan__31EC6D26" Association="Self.FK__HoaDon__khachHan__31EC6D26">
+          <AssociationSet Name="FK__HoaDon__khachHan__44FF419A" Association="Self.FK__HoaDon__khachHan__44FF419A">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="HoaDon" EntitySet="HoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__danhMuc__2A4B4B5E" Association="Self.FK__SanPham__danhMuc__2A4B4B5E">
+          <AssociationSet Name="FK__SanPham__danhMuc__3D5E1FD2" Association="Self.FK__SanPham__danhMuc__3D5E1FD2">
             <End Role="DanhMuc" EntitySet="DanhMuc" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_HVTShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -280,9 +300,10 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="diaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="tenDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="matKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="matKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__soLuong__2D27B809" FromRole="KhachHang" ToRole="GioHang" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__khachHan__31EC6D26" FromRole="KhachHang" ToRole="HoaDon" />
+          <Property Name="soDienThoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="QuanTriVien">
           <Key>
@@ -424,19 +445,19 @@
             <End Role="HoaDon" EntitySet="HoaDons" />
           </AssociationSet>
           <FunctionImport Name="ProcDeleteSanPham" ReturnType="Collection(DB_HVTShopModel.ProcDeleteSanPham_Result)">
-            <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
+          <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProcGetDanhMuc" ReturnType="Collection(DB_HVTShopModel.ProcGetDanhMuc_Result)">
-            <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          <Parameter Name="danhMucID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProcGetGioHang" ReturnType="Collection(DB_HVTShopModel.ProcGetGioHang_Result)">
-            <Parameter Name="khachHangID" Mode="In" Type="Int32" />
+          <Parameter Name="khachHangID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProcGetSanPham" ReturnType="Collection(DB_HVTShopModel.ProcGetSanPham_Result)">
-            <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
+          <Parameter Name="sanPhamID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProcGetSanPhamDanhMuc" ReturnType="Collection(DB_HVTShopModel.ProcGetSanPhamDanhMuc_Result)">
-            <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          <Parameter Name="danhMucID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ProcInsertSanPham">
             <Parameter Name="tenSanPham" Mode="In" Type="String" />
@@ -454,6 +475,26 @@
             <Parameter Name="hinhAnh" Mode="In" Type="String" />
             <Parameter Name="moTa" Mode="In" Type="String" />
             <Parameter Name="danhMucID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcGetNameAndNumSPOfDM" ReturnType="Collection(DB_HVTShopModel.ProcGetNameAndNumSPOfDM_Result)" />
+          <FunctionImport Name="ProcGetNumMonth" ReturnType="Collection(DB_HVTShopModel.ProcGetNumMonth_Result)" />
+          <FunctionImport Name="ProcGetRowCountDM" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcGetRowCountHD" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcGetRowCountHH" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcGetRowCountSP" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="ProcUpdateKhachHang">
+            <Parameter Name="khachHangID" Mode="In" Type="Int32" />
+            <Parameter Name="hoTen" Mode="In" Type="String" />
+            <Parameter Name="ngaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="gioiTinh" Mode="In" Type="String" />
+            <Parameter Name="soDienThoai" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="diaChi" Mode="In" Type="String" />
+            <Parameter Name="matKhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProcUpdateKhachHangMatKhau">
+            <Parameter Name="khachHangID" Mode="In" Type="Int32" />
+            <Parameter Name="matKhau" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ProcDeleteSanPham_Result">
@@ -489,6 +530,16 @@
           <Property Type="String" Name="hinhAnh" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="moTa" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="danhMucID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcGetNameAndNumSPOfDM_Result">
+          <Property Type="Int32" Name="danhMucID" Nullable="true" />
+          <Property Type="String" Name="tenDanhMuc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="totalQty" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcGetNumMonth_Result">
+          <Property Type="Int32" Name="month_num" Nullable="true" />
+          <Property Type="String" Name="month_str" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="sum_month" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -538,6 +589,7 @@
           <EntitySetMapping Name="KhachHangs">
             <EntityTypeMapping TypeName="DB_HVTShopModel.KhachHang">
               <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="soDienThoai" ColumnName="soDienThoai" />
                 <ScalarProperty Name="khachHangID" ColumnName="khachHangID" />
                 <ScalarProperty Name="hoTen" ColumnName="hoTen" />
                 <ScalarProperty Name="ngaySinh" ColumnName="ngaySinh" />
@@ -627,6 +679,30 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProcInsertSanPham" FunctionName="DB_HVTShopModel.Store.ProcInsertSanPham" />
           <FunctionImportMapping FunctionImportName="ProcUpdateSanPham" FunctionName="DB_HVTShopModel.Store.ProcUpdateSanPham" />
+          <FunctionImportMapping FunctionImportName="ProcGetNameAndNumSPOfDM" FunctionName="DB_HVTShopModel.Store.ProcGetNameAndNumSPOfDM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetNameAndNumSPOfDM_Result">
+                <ScalarProperty Name="danhMucID" ColumnName="danhMucID" />
+                <ScalarProperty Name="tenDanhMuc" ColumnName="tenDanhMuc" />
+                <ScalarProperty Name="totalQty" ColumnName="totalQty" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetNumMonth" FunctionName="DB_HVTShopModel.Store.ProcGetNumMonth">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_HVTShopModel.ProcGetNumMonth_Result">
+                <ScalarProperty Name="month_num" ColumnName="month_num" />
+                <ScalarProperty Name="month_str" ColumnName="month_str" />
+                <ScalarProperty Name="sum_month" ColumnName="sum_month" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountDM" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountDM" />
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountHD" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountHD" />
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountHH" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountHH" />
+          <FunctionImportMapping FunctionImportName="ProcGetRowCountSP" FunctionName="DB_HVTShopModel.Store.ProcGetRowCountSP" />
+          <FunctionImportMapping FunctionImportName="ProcUpdateKhachHang" FunctionName="DB_HVTShopModel.Store.ProcUpdateKhachHang" />
+          <FunctionImportMapping FunctionImportName="ProcUpdateKhachHangMatKhau" FunctionName="DB_HVTShopModel.Store.ProcUpdateKhachHangMatKhau" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

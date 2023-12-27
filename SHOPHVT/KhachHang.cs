@@ -29,6 +29,7 @@ namespace SHOPHVT
         public string diaChi { get; set; }
         public string tenDangNhap { get; set; }
         public string matKhau { get; set; }
+        public string soDienThoai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GioHang> GioHangs { get; set; }

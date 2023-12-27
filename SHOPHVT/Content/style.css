@@ -8236,12 +8236,14 @@ h1, h2, h3, h4, h5,
         .hero-wrap .slider-text .breadcrumbs span a {
           color: #fff; }
     .hero-wrap .slider-text .bread {
-      font-weight: 800;
-      color: #fff;
-      font-size: 30px;
-      font-family: "Poppins", Arial, sans-serif;
-      letter-spacing: 3px;
-      text-transform: uppercase; }
+        font-weight: 800;
+        color: #fff;
+        font-size: 30px;
+/*        font-family: "Poppins", Arial, sans-serif;*/
+        font-family: "Times New Roman", Times, serif;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
     .hero-wrap .slider-text .btn-primary {
       border: 1px solid rgba(255, 255, 255, 0.4);
       -webkit-border-radius: 30px;

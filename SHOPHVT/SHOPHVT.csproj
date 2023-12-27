@@ -188,6 +188,12 @@
     <Compile Include="ProcGetGioHang_Result.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProcGetNameAndNumSPOfDM_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcGetNumMonth_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProcGetSanPhamDanhMuc_Result.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>

@@ -141,5 +141,85 @@ namespace SHOPHVT
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcUpdateSanPham", sanPhamIDParameter, tenSanPhamParameter, donGiaParameter, soLuongParameter, hinhAnhParameter, moTaParameter, danhMucIDParameter);
         }
+    
+        public virtual ObjectResult<ProcGetNameAndNumSPOfDM_Result> ProcGetNameAndNumSPOfDM()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProcGetNameAndNumSPOfDM_Result>("ProcGetNameAndNumSPOfDM");
+        }
+    
+        public virtual ObjectResult<ProcGetNumMonth_Result> ProcGetNumMonth()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProcGetNumMonth_Result>("ProcGetNumMonth");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ProcGetRowCountDM()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ProcGetRowCountDM");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ProcGetRowCountHD()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ProcGetRowCountHD");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ProcGetRowCountHH()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ProcGetRowCountHH");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ProcGetRowCountSP()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ProcGetRowCountSP");
+        }
+    
+        public virtual int ProcUpdateKhachHang(Nullable<int> khachHangID, string hoTen, Nullable<System.DateTime> ngaySinh, string gioiTinh, string soDienThoai, string email, string diaChi, string matKhau)
+        {
+            var khachHangIDParameter = khachHangID.HasValue ?
+                new ObjectParameter("khachHangID", khachHangID) :
+                new ObjectParameter("khachHangID", typeof(int));
+    
+            var hoTenParameter = hoTen != null ?
+                new ObjectParameter("hoTen", hoTen) :
+                new ObjectParameter("hoTen", typeof(string));
+    
+            var ngaySinhParameter = ngaySinh.HasValue ?
+                new ObjectParameter("ngaySinh", ngaySinh) :
+                new ObjectParameter("ngaySinh", typeof(System.DateTime));
+    
+            var gioiTinhParameter = gioiTinh != null ?
+                new ObjectParameter("gioiTinh", gioiTinh) :
+                new ObjectParameter("gioiTinh", typeof(string));
+    
+            var soDienThoaiParameter = soDienThoai != null ?
+                new ObjectParameter("soDienThoai", soDienThoai) :
+                new ObjectParameter("soDienThoai", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var diaChiParameter = diaChi != null ?
+                new ObjectParameter("diaChi", diaChi) :
+                new ObjectParameter("diaChi", typeof(string));
+    
+            var matKhauParameter = matKhau != null ?
+                new ObjectParameter("matKhau", matKhau) :
+                new ObjectParameter("matKhau", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcUpdateKhachHang", khachHangIDParameter, hoTenParameter, ngaySinhParameter, gioiTinhParameter, soDienThoaiParameter, emailParameter, diaChiParameter, matKhauParameter);
+        }
+    
+        public virtual int ProcUpdateKhachHangMatKhau(Nullable<int> khachHangID, string matKhau)
+        {
+            var khachHangIDParameter = khachHangID.HasValue ?
+                new ObjectParameter("khachHangID", khachHangID) :
+                new ObjectParameter("khachHangID", typeof(int));
+    
+            var matKhauParameter = matKhau != null ?
+                new ObjectParameter("matKhau", matKhau) :
+                new ObjectParameter("matKhau", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcUpdateKhachHangMatKhau", khachHangIDParameter, matKhauParameter);
+        }
     }
 }

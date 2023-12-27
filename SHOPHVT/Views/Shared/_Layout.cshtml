@@ -54,19 +54,19 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")">HVT Shop</a>
+            <a class="navbar-brand" href="@Url.Action("", "TrangChu")">HVT Shop</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item @Html.IsActive("Index", "TrangChu")"><a href="@Url.Action("Index", "TrangChu")" class="nav-link">Trang chủ</a></li>
+                    <li class="nav-item @Html.IsActive("Index", "TrangChu")"><a href="@Url.Action("", "TrangChu")" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle @Html.IsActive("Index", "Product")" href="@Url.Action("Index", "Product")" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                        <a class="nav-link dropdown-toggle @Html.IsActive("Index", "Product")" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item @Html.IsActive("Index", "Product")" href="@Url.Action("Index", "Product")">Shop</a>
-                            <a class="dropdown-item @Html.IsActive("Index", "Cart")" href="@Url.Action("Index", "Cart")">Giỏ hàng</a>
+                            <a class="dropdown-item @Html.IsActive("Index", "Product")" href="@Url.Action("", "Product")">Sản phẩm</a>
+                            <a class="dropdown-item @Html.IsActive("Index", "Cart")" href="@Url.Action("", "Cart")">Giỏ hàng</a>
                         </div>
                     </li>
 
@@ -77,9 +77,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quản Lý</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                    <a class="dropdown-item align-items-center" href="@Url.Action("Index", "SanPhams1")">Quản lý sản phẩm</a>
-                                    <a class="dropdown-item align-items-center" href="@Url.Action("Index", "KhachHangs")">Quản lý khách hàng</a>
-
+                                    <a class="dropdown-item align-items-center @Html.IsActive("", "SanPham")" href="@Url.Action("", "SanPham")">Quản lý sản phẩm</a>
+                                    <a class="dropdown-item align-items-center @Html.IsActive("", "KhachHang")" href="@Url.Action("", "KhachHang")">Quản lý khách hàng</a>
+                                    <a class="dropdown-item align-items-center @Html.IsActive("", "Dashboard")" href="@Url.Action("", "Dashboard")">Dashboard</a>
                                 </div>
                             </li>
                         }
@@ -88,7 +88,7 @@
 
                     @if (Session["email"] != null)
                     {
-                        <li class="nav-item @Html.IsActive("Index", "Customer")"><a href="@Url.Action("Index", "Customer")" class="nav-link">Tài Khoản</a></li>
+                        <li class="nav-item @Html.IsActive("", "Customer")"><a href="@Url.Action("", "Customer")" class="nav-link">Tài Khoản</a></li>
                         <li class="nav-item"><a href="@Url.Action("Dangxuat", "TrangChu")" class="nav-link">Đăng xuất</a></li>
                     }
                     else
@@ -98,7 +98,7 @@
 
 
                     <li class="nav-item cta cta-colored">
-                        <a href="@Url.Action("Index", "Cart")" class="nav-link @Html.IsActive("Index", "Cart")"><span class="icon-shopping_cart"></span>[0]</a>
+                        <a href="@Url.Action("Index", "Cart")" class="nav-link @Html.IsActive("", "Cart")"><span class="icon-shopping_cart"></span>[0]</a>
                     </li>
 
                 </ul>
@@ -109,6 +109,7 @@
 
     @RenderBody()
 
+    <hr />
 
     <footer class="ftco-footer ftco-section">
         <div class="container">
