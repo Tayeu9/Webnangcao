@@ -469,7 +469,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Update.cshtml" />
     <Content Include="Views\Customer\UpdatePassword.cshtml" />
