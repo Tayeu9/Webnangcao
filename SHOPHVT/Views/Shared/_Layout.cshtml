@@ -98,7 +98,7 @@
 
 
                     <li class="nav-item cta cta-colored">
-                        <a href="@Url.Action("Index", "Cart")" class="nav-link @Html.IsActive("", "Cart")"><span class="icon-shopping_cart"></span>[0]</a>
+                        <a href="@Url.Action("Index", "Cart")" class="nav-link @Html.IsActive("", "Cart")"><span class="icon-shopping_cart"></span>[@Html.GetTotalCartItem()]</a>
                     </li>
 
                 </ul>

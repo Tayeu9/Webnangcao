@@ -13,6 +13,7 @@ namespace SHOPHVT.Controllers
         // GET: Cart
         DB_HVTShopEntities db = new DB_HVTShopEntities();
         private string CartSession = "CartSession";
+        private string CartItemCount = "CartItemCount";
         public ActionResult AddItem(int productId, int quantity)
         {
             var Sanpham = new ProductDao().ViewDetail(productId);
@@ -41,6 +42,7 @@ namespace SHOPHVT.Controllers
                 }
                 //Gán vào session
                 Session[CartSession] = list;
+                Session[CartItemCount] = list.Count;
             }
             else
             {
@@ -52,6 +54,7 @@ namespace SHOPHVT.Controllers
                 list.Add(item);
                 //Gán vào session
                 Session[CartSession] = list;
+                Session[CartItemCount] = list.Count;
             }
             return RedirectToAction("Index");
         }
@@ -80,6 +83,7 @@ namespace SHOPHVT.Controllers
             if (sanpham != null)
             {
                 list.RemoveAll(n => n.sanpham.sanPhamID == productId);
+                Session[CartItemCount] = list.Count;
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
